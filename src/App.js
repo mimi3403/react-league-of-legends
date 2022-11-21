@@ -1,25 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import Axios from "axios";
+import { useState } from "react";
+import ChampionsList from "./components/ChampionsList";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const [champions, setChampions] = useState([]);
+  const BASE_URL =
+    "https://ddragon.leagueoflegends.com/cdn/10.4.1/data/en_US/champion.json";
+  const SKIN_URL =
+    "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/";
+
+  async function getChampions() {
+    const result = await Axios.get(BASE_URL);
+    setChampions(result.data.data);
+    console.log(result.data);
+  }
+
+  return <></>;
 }
 
 export default App;
